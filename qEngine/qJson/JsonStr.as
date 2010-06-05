@@ -13,7 +13,7 @@
 		}
 		public function fromObject(o:Object):void {
 			var jsonStr:String = JSON.encode(o)
-			trace("JsonStr: " + jsonStr)
+			//trace("JsonStr: " + jsonStr)
 			fromString(jsonStr)
 		}
 		

@@ -11,25 +11,17 @@
 	public class VectorLine implements I_Drawable {
 		
 		var origin:Point = new Point();
-		var offsets:Array = new Array();
+		var offset:Vector2D = new Vector2D();
 		
-		public function VectorLine() {
-			//origin = p_origin;
-			//offsets = p_offsets;
-			offsets.push(new Offset())
-			offsets.pop()
+		public function VectorLine (p_origin:Point, p_offset:Vector2D) {
+			origin = p_origin;
+			offsets = p_offset;
 		}
 		
 		public function setFromJSON(jsonOb:Object) {
 			origin.x = jsonOb.Origin.X;
 			origin.y = jsonOb.Origin.Y;
-			
-			// This needs to be Optimized, extremely wasteful atm
-			offsets.slice();
-			for (var i:int = 0; i < jsonOb.Offsets.length; i++) {
-				offsets[i] = new Offset();
-				offsets[i].setOffset((jsonOb.Offsets[i].X as Number), (jsonOb.Offsets[i].Y as Number))
-			}
+			offset.setVector2D(jsonOb.Offset.X, jsonOb.Offset.Y)
 		}
 		
 		/* INTERFACE qEngine.qRender.I_Drawable */
