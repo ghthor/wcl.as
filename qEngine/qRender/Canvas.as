@@ -11,6 +11,10 @@
 			graphics.moveTo(0, 0);
 			graphics.lineStyle(1, 0xffffff);
 		}
+		
+		public function draw(drawable:I_Drawable):void {
+			drawable.drawToCanvas(this);
+		}
 	}
 	
 }

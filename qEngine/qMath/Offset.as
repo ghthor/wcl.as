@@ -2,46 +2,45 @@
 {
 	import flash.geom.Point;
 	
-	public class Vector extends Point
+	public class Offset extends Point
 	{
 		// Constructor
-		public function Vector(p_x:Number = 0, p_y:Number = 0):void
-		{
+		public function Offset(p_x:Number = 0, p_y:Number = 0) {
 			super(p_x, p_y);
 			//x = p_x;
 			//y = p_y;
 		}
 		
 		// Sets "this"'s x and y properties
-		public function setVector(p_x:Number, p_y:Number):void
+		public function setOffset(p_x:Number, p_y:Number):void
 		{
 			x = p_x;
 			y = p_y;
 		}
 		
-		// Sets "this"'s x and y properties from a Vector
-		public function setByVector(p_vect:Vector):void
+		// Sets "this"'s x and y properties from a Offset
+		public function setByOffset(p_vect:Offset):void
 		{
 			x = p_vect.x;
 			y = p_vect.y;
 		}				
 		
-		// Adds a Vector to "this"
-		public function addVector(i_vect:Vector):void
+		// Adds a Offset to "this"
+		public function addOffset(i_vect:Offset):void
 		{			
 			x = x + i_vect.x;
 			y = y + i_vect.y;
 		}
 		
 		public function addLength(p_length:Number):void{
-			var tempVect:Vector = toUnitVector();
+			var tempVect:Offset = toUnitVector();
 			tempVect.scale(p_length);
 			trace("adding " + tempVect + " -to " + this);
-			this.addVector(tempVect);
+			this.addOffset(tempVect);
 		}
 		
-		// Subtracts a Vector from "this"
-		public function subtractVector(p_vect:Vector):void
+		// Subtracts a Offset from "this"
+		public function subtractOffset(p_vect:Offset):void
 		{
 			x = x - p_vect.x;
 			y = y - p_vect.y;
@@ -55,34 +54,34 @@
 			scale(tempLength);
 		}
 			
-		// Scales the Vector by an Amount
+		// Scales the Offset by an Amount
 		public function scale(i_val:Number):void
 		{	
 			x *= i_val;
 			y *= i_val;
 		}
 		
-		// Scales the Vector to length 1
+		// Scales the Offset to length 1
 		public function makeUnitVector():void
 		{	
 			scale(1/length);
 		}
 		
-		// Returns a Vector that is the UnitVector of "this" vector
-		public function toUnitVector():Vector
+		// Returns a Offset that is the UnitVector of "this" Offset
+		public function toUnitVector():Offset
 		{
-			var r_vect:Vector = new Vector(x, y);
+			var r_vect:Offset = new Offset(x, y);
 			r_vect.makeUnitVector();
 			return r_vect;
 		}
 		
-		// Returns the Radian Angle Value of this Vector
+		// Returns the Radian Angle Value of this Offset
 		public function toRadian():Number
 		{
 			//// Needs Optimization ////
 			var t:Number = 0;
 			var pi:Number = Math.PI;
-			var i_vect:Vector = this.toUnitVector();
+			var i_vect:Offset = this.toUnitVector();
 			if(i_vect.x >= 0 && i_vect.y >= 0)
 			{	//1st Quad and 0/90/360
 				t = Math.acos(i_vect.x);
@@ -111,7 +110,7 @@
 			return t;
 		}
 		
-		// Returns the Radian Angle Value of this Vector
+		// Returns the Radian Angle Value of this Offset
 		public function toDegrees():Number
 		{
 			var t:Number = toRadian();
