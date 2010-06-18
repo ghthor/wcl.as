@@ -36,16 +36,17 @@
 		
 		public function drawToCanvas(canvas:Canvas):void{
 			canvas.defaults();
+			canvas.graphics.moveTo(origin.x, -origin.y)
+			var nextX:Number = 0
+			var nextY:Number = 0
+			//canvas.graphics.moveTo(nextX, nextY);
 			
-			var nextX:Number = origin.x + offsets[0].x
-			var nextY:Number = -origin.y + -(offsets[0].y)
-			canvas.graphics.moveTo(nextX, nextY);
-			
-			for (var i:int = 1; i < offsets.length; i++) {
+			for (var i:int = 0; i < offsets.length; i++) {
 				nextX = origin.x + offsets[i].x
 				nextY = -origin.y + -(offsets[i].y)
 				canvas.graphics.lineTo(nextX, nextY);
 			}
+			canvas.graphics.lineTo(origin.x, -origin.y)
 		}
 		
 	}

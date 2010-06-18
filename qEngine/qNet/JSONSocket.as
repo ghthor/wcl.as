@@ -48,7 +48,6 @@
 			if (Security.sandboxType == "remote") {
 				Console.writeStr("Loading Policy File")
 				Security.loadPolicyFile("http://server.local/crossdomain.xml")
-				Security.
 			}
 			JSONObjects.slice()
 			//Security.loadPolicyFile("crossdomain.xml")
