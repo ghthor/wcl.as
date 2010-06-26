@@ -10,24 +10,24 @@
 	 */
 	public class VectorObject implements I_Drawable {
 		
-		var origin:Point = new Point();
-		var offsets:Array = new Array();
+		var origin:Point = new Point()
+		var offsets:Array = new Array()
 		
 		public function VectorObject() {
 			//origin = p_origin;
 			//offsets = p_offsets;
-			offsets.push(new Offset())
+			offsets.push(new Vector2D())
 			offsets.pop()
 		}
 		
 		public function setFromJSON(jsonOb:Object) {
-			origin.x = jsonOb.Origin.X;
-			origin.y = jsonOb.Origin.Y;
+			origin.x = jsonOb.Origin.X
+			origin.y = jsonOb.Origin.Y
 			
 			// This needs to be Optimized, extremely wasteful atm
 			offsets.slice();
 			for (var i:int = 0; i < jsonOb.Offsets.length; i++) {
-				offsets[i] = new Offset();
+				offsets[i] = new Vector2D();
 				offsets[i].setVector2D((jsonOb.Offsets[i].X as Number), (jsonOb.Offsets[i].Y as Number))
 			}
 		}

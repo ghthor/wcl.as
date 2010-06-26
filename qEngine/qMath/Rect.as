@@ -1,0 +1,48 @@
+﻿package qEngine.qMath {
+	import flash.geom.Point;
+	import qEngine.qRender.Canvas;
+	import qEngine.qRender.I_Drawable;
+	
+	/**
+	 * ...
+	 * @author ...
+	 */
+	public class Rect implements I_Drawable {
+		public var botLeft:Point = new Point()
+		public var offset:Vector2D = new Vector2D()
+		
+		public function get topRight():Point {
+			var temp = new Point(botLeft.x + offset.x, botLeft.y + offset.y)
+			return temp
+		}
+		
+		public function get topLeft():Point {
+			var temp = new Point(botLeft.x, botLeft.y + offset.y)
+			return temp
+		}
+		
+		public function get botRight():Point {
+			var temp = new Point(botLeft.x + offset.x, botLeft.y)
+			return temp
+		}
+		
+		public function setFromJSON(jsonOb:Object) {
+			botLeft.x = jsonOb.O.X
+			botLeft.y = jsonOb.O.Y
+			offset.x = jsonOb.V.X
+			offset.y = jsonOb.V.Y
+		}
+		
+		/* INTERFACE qEngine.qRender.I_Drawable */
+		
+		public function drawToCanvas(canvas:Canvas):void{
+			canvas.defaults()
+			canvas.graphics.moveTo(botLeft.x, -botLeft.y)
+			canvas.graphics.drawRect(botLeft.x, -botRight.y, offset.x, offset.y)
+		}
+		
+		/* INTERFACE qEngine.qRender.I_Drawable */
+		
+	}
+	
+}

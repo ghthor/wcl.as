@@ -1,5 +1,5 @@
 ﻿package qEngine.qRender {
-	import qCode.qRender.Canvas;
+	import qEngine.qRender.Canvas;
 	
 	/**
 	 * ...

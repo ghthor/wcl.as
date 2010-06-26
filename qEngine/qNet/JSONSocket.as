@@ -15,7 +15,7 @@
 	 * ...
 	 * @author ...
 	 */
-	public class JSONSocket extends Socket{
+	public class JSONSocket extends Socket {
 		var JSONStrSize:uint;
 		var JSONObjects:Array = new Array();
 		
@@ -58,7 +58,7 @@
 		public function ConnToServer():void {
 			Console.writeStr("Connecting To Server")
 			//connect("server.local", 56000)
-			connect("192.168.10.14", 56000)
+			connect("192.168.9.1", 56000)
 		}
 		
 		public function handleConnect(e:Event):void {
@@ -74,8 +74,9 @@
 		public function readJSONSize():void {
 			if (JSONStrSize == 0) {
 				if (bytesAvailable >= 4) {
-					JSONStrSize = readUnsignedInt();
-					Console.writeStr("Json String Size: " + JSONStrSize);
+					JSONStrSize = readUnsignedInt()
+					//Console.writeStr("Json String Size: " + JSONStrSize)
+					//trace("Json String Size: " + JSONStrSize)
 					readJSONObject();
 				}
 			}else {
@@ -84,17 +85,20 @@
 		}
 		
 		public function readJSONObject():void {
-			Console.writeStr("Reading Json Object bytesAvail: " + bytesAvailable + " JSONStrSize: " + JSONStrSize)
+			//Console.writeStr("Reading Json Object bytesAvail: " + bytesAvailable + " JSONStrSize: " + JSONStrSize)
+			//trace("Reading Json Object bytesAvail: " + bytesAvailable + " JSONStrSize: " + JSONStrSize)
 			if (bytesAvailable >= JSONStrSize) {
 				var bytes:ByteArray = new ByteArray()
 				readBytes(bytes, 0, JSONStrSize)
 				var JSONStr:String = bytes.readUTFBytes(JSONStrSize)
 				//Console.writeStr("JSONStr: " + JSONStr)
+				//trace("JSONStr: " + JSONStr)
 				JSONStrSize = 0;
 				JSONObjects.push(JSON.decode(JSONStr))
 				if (JSONObjects.length > 0) {
 					dispatchEvent(new Event("new_JSON"));
 				}
+				// This if is redundant
 				if (bytesAvailable >= 4) {
 					readJSONSize()
 				}
@@ -104,7 +108,7 @@
 		public function writeJSONStr(jsonStr:JsonStr):void {
 			writeUnsignedInt(jsonStr.bytes.length)
 			writeBytes(jsonStr.bytes)
-			flush()
+			//flush()
 		}
 		
 		public function popJSON():Object {
