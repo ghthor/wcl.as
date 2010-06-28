@@ -10,7 +10,7 @@
 	public class Rect implements I_Drawable {
 		public var botLeft:Point = new Point()
 		public var offset:Vector2D = new Vector2D()
-		
+				
 		public function get topRight():Point {
 			var temp = new Point(botLeft.x + offset.x, botLeft.y + offset.y)
 			return temp
@@ -32,13 +32,12 @@
 			offset.x = jsonOb.V.X
 			offset.y = jsonOb.V.Y
 		}
-		
 		/* INTERFACE qEngine.qRender.I_Drawable */
 		
 		public function drawToCanvas(canvas:Canvas):void{
 			canvas.defaults()
-			canvas.graphics.moveTo(botLeft.x, -botLeft.y)
-			canvas.graphics.drawRect(botLeft.x, -botRight.y, offset.x, offset.y)
+			canvas.graphics.moveTo(topLeft.x, -topLeft.y)
+			canvas.graphics.drawRect(topLeft.x, -topLeft.y, offset.x, offset.y)
 		}
 		
 		/* INTERFACE qEngine.qRender.I_Drawable */
