@@ -33,10 +33,7 @@
 		}
 		
 		public function addLength(p_length:Number):void{
-			var tempVect:Vector2D = toUnitVector();
-			tempVect.scale(p_length);
-			trace("adding " + tempVect + " -to " + this);
-			this.addVector2D(tempVect);
+			scale(1 + p_length)
 		}
 		
 		// Subtracts a Vector2D from "this"
@@ -108,6 +105,22 @@
 			}
 			
 			return t;
+		}
+		
+		public function OffsetTo(p:Point):Vector2D {
+			var v:Vector2D = new Vector2D(p.x - x, p.y - y)
+			return v
+		}
+		
+		public function Invert() {
+			x = -x
+			y = -y
+		}
+		
+		public function Inverted():Vector2D {
+			var v:Vector2D = new Vector2D(x, y)
+			v.Invert()
+			return v
 		}
 		
 		// Returns the Degree Angle Value of this Vector2D
