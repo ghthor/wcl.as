@@ -32,10 +32,6 @@
 			y = y + i_vect.y;
 		}
 		
-		public function addLength(p_length:Number):void{
-			scale(1 + p_length)
-		}
-		
 		// Subtracts a Vector2D from "this"
 		public function subtractVector2D(p_vect:Vector2D):void
 		{
@@ -50,6 +46,12 @@
 			y = Math.sin(tempRotation * Math.PI/180);
 			scale(tempLength);
 		}
+		
+		public function makeLength(p_length:Number):void {
+			if (length == 0) { return }
+			var scaleRatio:Number = p_length / length
+			scale(scaleRatio)
+		}
 			
 		// Scales the Vector2D by an Amount
 		public function scale(i_val:Number):void
@@ -61,7 +63,14 @@
 		// Scales the Vector2D to length 1
 		public function makeUnitVector():void
 		{	
-			scale(1/length);
+			var num:Number = 1.0 / length
+			//if (isNaN(num)) {
+				//trace(this, "Attempted Scale by NaN")
+				//scale(10)
+				//makeUnitVector()
+				//return
+			//}
+			scale(num);
 		}
 		
 		// Returns a Vector2D that is the UnitVector of "this" Vector2D
