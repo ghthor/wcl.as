@@ -18,6 +18,10 @@
 			offsets = p_offset
 		}
 		
+		public function get length():Number {
+			return offset.length
+		}
+		
 		public function setFromJSON(jsonOb:Object) {
 			origin.x = jsonOb.O.X
 			origin.y = jsonOb.O.Y
