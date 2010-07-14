@@ -8,7 +8,7 @@
 	public class EndPt extends MovieClip {
 		public function EndPt() {
 			stop()
-			visible = false
+			//visible = false
 			mouseEnabled = false
 			mouseChildren = false
 		}
