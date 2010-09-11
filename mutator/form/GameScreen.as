@@ -7,6 +7,7 @@
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
+	import mutator.Bullet;
 	import mutator.BulletRotation;
 	import mutator.BulletSize;
 	import mutator.Ship;
@@ -26,39 +27,27 @@
 		
 		var ship:Ship = new Ship()
 		
-		var test:Oscillator = new Oscillator()
-		
-		var testBullet:MovieClip;
-		var testBulletSize:BulletSize;
-		var testBulletRotation:BulletRotation;
-		
 		public var gui_lives:TextField;
 		
 		public function GameScreen() {
 			stop();
 		}
 		
+		private var bullets:Array = new Array()
+		
 		public function testingInit() {
-			testBullet = new Bullet()
-			testBulletSize = BulletSize.New()
-			testBulletRotation = BulletRotation.New()
-			testBullet.x = 100
-			testBullet.y = 100
-			addChild(testBullet)
 			
-			testBullet.addEventListener(MouseEvent.CLICK, randomizeSize)
-			testBullet.mouseEnabled = true
+			FormManager.theStage.addEventListener(MouseEvent.CLICK, newRandomBullet)
 		}
 		
-		private function randomizeSize(e:MouseEvent):void {
-			testBulletSize.randomize()
-			testBulletRotation.randomize()
-		}		
-		
-		public function updateTest() {
-			testBullet.scaleX = testBulletSize.scaleX
-			testBullet.scaleY = testBulletSize.scaleY
-			testBullet.rotation += testBulletRotation.nextRotation
+		private function newRandomBullet(e:MouseEvent):void {
+			var bullet:Bullet = new Bullet()
+			bullet.initalize()
+			bullets.push(bullet)
+			
+			bullet.x = e.stageX
+			bullet.y = e.stageY
+			addChild(bullet)
 		}
 		
 		/// Run After All Forms Have Been Created
@@ -69,10 +58,6 @@
 			ship.initialize()
 			
 			addChild(ship);
-			
-			test.setMinMaxWithRandoms(RandomFloat.within(0, 10), RandomFloat.within(0, 10))
-			test.period = RandomFloat.within(10,20)
-			test.setStartAndDirection(test.randomWithin(), RandomBool.next())
 		}
 		
 		var Key_W = 87
@@ -129,11 +114,20 @@
 		}
 		
 		private function tick(e:Event):void {
-			//test.tick()
-			//trace(test)
-			testBulletSize.tick(1.0)
-			testBulletRotation.tick(1.0)
-			updateTest()
+			var offscreens:Array = new Array()
+			var bullet:Bullet
+			for (var i:int = 0; i < bullets.length; i++) {
+				bullet = bullets[i]
+				bullet.tick(1.0)
+				
+				if ((bullet.x < 0 || bullet.x > FormManager.theStage.stageWidth) && (bullet.y < 0 || bullet.y > FormManager.theStage.stageHeight)) {
+					removeChild(bullet)
+					offscreens.push(bullet)
+				}
+			}
+			for (var i:int = 0; i < offscreens.length; i++) {
+				bullets.splice(bullets.indexOf(offscreens[i]),1)
+			}
 		}
 		
 		public function enableAllEvents():void{
