@@ -44,8 +44,8 @@
 			return -rotation.cur
 		}
 		
-		public function tick() {
-			rotation.tick()
+		public function tick(percent:Number) {
+			rotation.tick(percent)
 		}
 	}
 	

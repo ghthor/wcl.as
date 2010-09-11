@@ -54,26 +54,26 @@ package mutator.statistic
 		}
 		
 		// All ticks should be able to take a Number Param with range [-1,1] signifying reversing an action
-		public function tick() {
+		public function tick(percent:Number) {
 			if (min == max) {
 				return;
 			}
 			if (direction == TOWARDS_MAX) {
-				tickPos()
+				tickPos(percent)
 			} else {
-				tickNeg()
+				tickNeg(percent)
 			}
 		}
 		
-		private function tickNeg() {
-			cur -= (range / period / 2)
+		private function tickNeg(percent:Number) {
+			cur -= (range / period / 2) * percent
 			if (cur <= min) {
 				direction = !direction
 			}
 		}
 		
-		private function tickPos() {
-			cur += (range / period / 2)
+		private function tickPos(percent:Number) {
+			cur += (range / period / 2) * percent
 			if (cur >= max) {
 				direction = !direction
 			}

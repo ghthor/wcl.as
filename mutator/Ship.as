@@ -2,16 +2,14 @@
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import wcl.AccurateMovieClip;
 	import wcl.form.FormManager;
 	
 	/**
 	 * ...
 	 * @author ...
 	 */
-	public class Ship extends MovieClip {
-		
-		private var _X:Number;
-		private var _Y:Number;
+	public class Ship extends AccurateMovieClip {
 		
 		private var bulletSpawnPoint:MovieClip;
 		
@@ -36,25 +34,7 @@
 			
 		}
 		
-		override public function set x(_x:Number):void {
-			_X = _x
-			super.x = _X
-		}
 		
-		override public function get x():Number {
-			super.x
-			return _X
-		}
-		
-		override public function set y(_y:Number):void {
-			_Y = _y
-			super.y = _Y
-		}
-		
-		override public function get y():Number {
-			super.y
-			return _Y
-		}
 	}
 	
 }

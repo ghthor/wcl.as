@@ -32,10 +32,6 @@ package mutator
 			return r
 		}
 		
-		public function mutate(seed:Number) {
-			
-		}
-		
 		public function get scaleX():Number {
 			return horizontal.cur / BULLET_SIZE
 		}
@@ -55,9 +51,13 @@ package mutator
 			vertical.randomStartAndDirection()
 		}
 		
-		public function tick() {
-			horizontal.tick()
-			vertical.tick()
+		public function tick(percent:Number) {
+			horizontal.tick(percent)
+			vertical.tick(percent)
+		}
+		
+		public function mutate(seed:Number) {
+			
 		}
 	}
 	

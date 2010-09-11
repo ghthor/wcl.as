@@ -131,8 +131,8 @@
 		private function tick(e:Event):void {
 			//test.tick()
 			//trace(test)
-			testBulletSize.tick()
-			testBulletRotation.tick()
+			testBulletSize.tick(1.0)
+			testBulletRotation.tick(1.0)
 			updateTest()
 		}
 		

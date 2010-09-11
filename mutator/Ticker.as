@@ -2,7 +2,7 @@ package mutator
 {
 	public interface Ticker
 	{
-		function tick();
+		function tick(percent:Number);
 	}
 	
 }
