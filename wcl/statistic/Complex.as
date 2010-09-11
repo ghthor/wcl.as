@@ -17,7 +17,7 @@ package wcl.statistic
 		}
 		
 		public function clone():Complex {
-			var c:ComplexStat = new Complex();
+			var c:Complex = new Complex();
 			c.min = _min;
 			c.max = _max;
 			c.cur = _cur;
@@ -76,8 +76,25 @@ package wcl.statistic
 			return RandomFloat.within(min, max)
 		}
 		
+		public function setCurrentToRandom() {
+			cur = randomWithin()
+		}
+		
+		public function get isMin():Boolean {
+			return (min == cur)
+		}
+		
+		public function get isMax():Boolean {
+			return (max == cur)
+		}
+		
 		public function toString():String {
 			var str:String = "Statistic [" + min + ":" + max + "] range: " + range + " cur: " + cur
+			if (isMax) {
+				str += " Max"
+			} else if (isMin) {
+				str += " Min"
+			}
 			return str
 		}
 	}	

@@ -2,13 +2,13 @@
 	
 	/**
 	 * ...
-	 * @author ...
+	 * @author Will Walthall
 	 */
 	public class RandomFloat
 	{
 		
-		public var min:Number = 0
-		public var max:Number = 1.0
+		public var min:Number
+		public var max:Number
 		
 		public static function within(min_:Number, max_:Number):Number {
 			var r:Number = Math.random()
