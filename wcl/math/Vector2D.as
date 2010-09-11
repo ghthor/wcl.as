@@ -18,6 +18,17 @@
 			y = p_y;
 		}
 		
+		public function setWithRadianAndLength(angle:Number, magnitude:Number):void {
+			x = Math.cos(angle)
+			y = Math.sin(angle)
+			
+			scale(magnitude)
+		}
+		
+		public function setWithDegreesAndLength(degrees:Number, magnitude:Number):void {
+			setWithRadianAndLength(degrees * Math.PI/180, magnitude)
+		}
+		
 		// Sets "this"'s x and y properties from a Vector2D
 		public function setByVector2D(p_vect:Vector2D):void
 		{
@@ -138,6 +149,7 @@
 			var t:Number = toRadian();
 			return (t * 180/Math.PI);
 		}
+		
 		public override function toString():String{
 			var r_val:String =  " <" + x + ", " + y + "> " + "Mag: " + length;
 			return r_val;
