@@ -7,15 +7,19 @@ package wcl.statistic
 	 */
 	public class Complex
 	{
-		public var min:Number;
-		public var max:Number;
-		public var cur:Number;		
+		private var _min:Number;	
+		private var _max:Number;		
+		private var _cur:Number;	
+		
+		public function Complex() {
+			_min = _max = _cur = 0
+		}
 		
 		public function clone():Complex {
 			var c:ComplexStat = new Complex();
-			c.min = min;
-			c.max = max;
-			c.cur = cur;
+			c.min = _min;
+			c.max = _max;
+			c.cur = _cur;
 			
 			return c;
 		}
@@ -24,12 +28,39 @@ package wcl.statistic
 			return max - min;
 		}
 		
+		public function get min():Number { return _min; }		
+		public function set min(value:Number):void {
+			_min = value;
+			if (_cur < _min) {
+				_cur = _min
+			}
+		}
+		
+		public function get max():Number { return _max; }		
+		public function set max(value:Number):void {
+			_max = value;
+			if (_cur > _max) {
+				_cur = _max
+			}
+		}
+		
+		public function get cur():Number { return _cur; }		
+		public function set cur(value:Number):void {
+			if (value <= _min) {
+				_cur = _min
+			} else if ( value >= _max) {
+				_cur = _max
+			} else {
+				_cur = value
+			}
+		}
+		
 		public function setToMax() {
-			cur = max
+			_cur = _max
 		}
 		
 		public function setToMin() {
-			cur = min
+			_cur = _min
 		}
 		
 		public function toString():String {
