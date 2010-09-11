@@ -1,5 +1,6 @@
 package wcl.statistic
 {
+	import wcl.math.RandomFloat;
 	
 	/**
 	 * ...
@@ -55,12 +56,24 @@ package wcl.statistic
 			}
 		}
 		
+		// takes to randoms and sets the smaller to min and the larger to max
+		// after that also sets cur to max
+		public function setMinMaxWithRandoms(rand1:Number, rand2:Number) {
+			_min = Math.min(rand1, rand2)
+			_max = Math.max(rand1, rand2)
+			_cur = _max
+		}
+		
 		public function setToMax() {
 			_cur = _max
 		}
 		
 		public function setToMin() {
 			_cur = _min
+		}
+		
+		public function randomWithin() {
+			return RandomFloat.within(min, max)
 		}
 		
 		public function toString():String {
