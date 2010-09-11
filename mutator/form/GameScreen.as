@@ -1,11 +1,14 @@
 ﻿package mutator.form
 {
 	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
+	import mutator.BulletRotation;
+	import mutator.BulletSize;
 	import mutator.Ship;
 	import mutator.statistic.Oscillator;
 	import wcl.form.*
@@ -25,14 +28,44 @@
 		
 		var test:Oscillator = new Oscillator()
 		
+		var testBullet:MovieClip;
+		var testBulletSize:BulletSize;
+		var testBulletRotation:BulletRotation;
+		
 		public var gui_lives:TextField;
 		
 		public function GameScreen() {
 			stop();
 		}
 		
+		public function testingInit() {
+			testBullet = new Bullet()
+			testBulletSize = BulletSize.New()
+			testBulletRotation = BulletRotation.New()
+			testBullet.x = 100
+			testBullet.y = 100
+			addChild(testBullet)
+			
+			testBullet.addEventListener(MouseEvent.CLICK, randomizeSize)
+			testBullet.mouseEnabled = true
+		}
+		
+		private function randomizeSize(e:MouseEvent):void {
+			testBulletSize.randomize()
+			testBulletRotation.randomize()
+		}		
+		
+		public function updateTest() {
+			testBullet.scaleX = testBulletSize.scaleX
+			testBullet.scaleY = testBulletSize.scaleY
+			testBullet.rotation += testBulletRotation.nextRotation
+		}
+		
 		/// Run After All Forms Have Been Created
 		public function initialize():void {
+			
+			testingInit()
+			
 			ship.initialize()
 			
 			addChild(ship);
@@ -96,8 +129,11 @@
 		}
 		
 		private function tick(e:Event):void {
-			test.tick()
-			trace(test)
+			//test.tick()
+			//trace(test)
+			testBulletSize.tick()
+			testBulletRotation.tick()
+			updateTest()
 		}
 		
 		public function enableAllEvents():void{

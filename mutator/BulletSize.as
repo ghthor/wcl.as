@@ -10,14 +10,16 @@ package mutator
 	 */
 	public class BulletSize implements Mutatable, Ticker
 	{
-		public const MAX:Number = 10
-		public const MIN:Number = 5	
+		public static const MAX:Number = 50
+		public static const MIN:Number = 1
 		private static var sizeRand:RandomFloat = new RandomFloat(MIN, MAX)
 		
 		// Smaller equals quicker pulsation
-		public const PERIOD_MIN:Number = 10
-		public const PERIOD_MAX:Number = 50
+		public static const PERIOD_MIN:Number = 1
+		public static const PERIOD_MAX:Number = 50
 		private static var periodRand:RandomFloat = new RandomFloat(PERIOD_MIN, PERIOD_MAX)
+		
+		private static const BULLET_SIZE = 100
 		
 		public var horizontal:Oscillator = new Oscillator()
 		public var vertical:Oscillator = new Oscillator()
@@ -26,15 +28,31 @@ package mutator
 		
 		public static function New():BulletSize {
 			var r:BulletSize = new BulletSize();
-			horizontal.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())
-			vertical.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())
-			
-			horizontal.period = periodRand.next()
-			vertical.period = periodRand.next()
+			r.randomize()
+			return r
 		}
 		
 		public function mutate(seed:Number) {
 			
+		}
+		
+		public function get scaleX():Number {
+			return horizontal.cur / BULLET_SIZE
+		}
+		
+		public function get scaleY():Number {
+			return vertical.cur / BULLET_SIZE
+		}
+		
+		public function randomize():void {
+			horizontal.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())
+			vertical.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())
+			
+			horizontal.period = periodRand.next()
+			horizontal.randomStartAndDirection()
+			
+			vertical.period = periodRand.next()
+			vertical.randomStartAndDirection()
 		}
 		
 		public function tick() {

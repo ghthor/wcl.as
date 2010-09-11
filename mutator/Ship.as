@@ -1,4 +1,5 @@
 ﻿package mutator {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import wcl.form.FormManager;
@@ -12,19 +13,27 @@
 		private var _X:Number;
 		private var _Y:Number;
 		
+		private var bulletSpawnPoint:MovieClip;
+		
 		public function Ship():void {
 			stop()
 		}
 		
 		public function initialize():void {
-			FormManager.theStage.addEventListener(MouseEvent.MOUSE_MOVE, mouseListener)
+			//FormManager.theStage.addEventListener(MouseEvent.MOUSE_MOVE, mouseListener)
 			x = FormManager.theStage.mouseX
 			y = FormManager.theStage.mouseY
+			
+			bulletSpawnPoint = BulletSpawnPt;
 		}
 		
 		public function mouseListener(e:MouseEvent):void {
 			x = e.stageX;
 			y = e.stageY;
+		}
+		
+		public function fire(e:MouseEvent):void {
+			
 		}
 		
 		override public function set x(_x:Number):void {
