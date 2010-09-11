@@ -11,11 +11,19 @@
 		private var _Y:Number;
 		private var __rotation:Number;
 		
+		public function AccurateMovieClip():void {
+			super()
+			__rotation = super.rotation
+			x = super.x
+			y = super.y
+		}
+		
 		override public function get rotation():Number {
+			super.rotation
 			return __rotation;
 		}
 		
-		override public function set rotation(value:Number) {
+		override public function set rotation(value:Number):void {
 			__rotation = value
 			super.rotation = __rotation
 		}
