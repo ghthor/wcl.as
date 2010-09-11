@@ -1,6 +1,6 @@
 package mutator
 {
-	public class Ticker
+	public interface Ticker
 	{
 		function tick();
 	}

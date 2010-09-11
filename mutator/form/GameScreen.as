@@ -6,7 +6,11 @@
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
+	import mutator.Ship;
+	import mutator.statistic.Oscillator;
 	import wcl.form.*
+	import wcl.math.RandomBool;
+	import wcl.math.RandomFloat;
 	import wcl.render.Canvas;
 	/**
 	 * ...
@@ -15,7 +19,11 @@
 	public class GameScreen extends Form implements I_Form
 	{
 		// useless atm
-		var canvas:Canvas = new Canvas();
+		var canvas:Canvas = new Canvas()
+		
+		var ship:Ship = new Ship()
+		
+		var test:Oscillator = new Oscillator()
 		
 		public var gui_lives:TextField;
 		
@@ -25,6 +33,13 @@
 		
 		/// Run After All Forms Have Been Created
 		public function initialize():void {
+			ship.initialize()
+			
+			addChild(ship);
+			
+			test.setMinMaxWithRandoms(RandomFloat.within(0, 10), RandomFloat.within(0, 10))
+			test.period = RandomFloat.within(10,20)
+			test.setStartAndDirection(test.randomWithin(), RandomBool.next())
 		}
 		
 		var Key_W = 87
@@ -81,6 +96,8 @@
 		}
 		
 		private function tick(e:Event):void {
+			test.tick()
+			trace(test)
 		}
 		
 		public function enableAllEvents():void{
