@@ -10,13 +10,13 @@ package mutator
 	 */
 	public class BulletSize implements Mutatable, Ticker
 	{
-		public static const MAX:Number = 50
-		public static const MIN:Number = 1
+		public static const MIN:Number = 5
+		public static const MAX:Number = 30
 		private static var sizeRand:RandomFloat = new RandomFloat(MIN, MAX)
 		
 		// Smaller equals quicker pulsation
-		public static const PERIOD_MIN:Number = 1
-		public static const PERIOD_MAX:Number = 50
+		public static const PERIOD_MIN:Number = 5
+		public static const PERIOD_MAX:Number = 20
 		private static var periodRand:RandomFloat = new RandomFloat(PERIOD_MIN, PERIOD_MAX)
 		
 		private static const BULLET_SIZE = 100

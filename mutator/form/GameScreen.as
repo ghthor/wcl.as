@@ -10,6 +10,7 @@
 	import mutator.Bullet;
 	import mutator.BulletRotation;
 	import mutator.BulletSize;
+	import mutator.OrbitingBullet;
 	import mutator.Ship;
 	import mutator.statistic.Oscillator;
 	import wcl.form.*
@@ -38,11 +39,13 @@
 		public function testingInit() {
 			
 			FormManager.theStage.addEventListener(MouseEvent.CLICK, newRandomBullet)
+			FormManager.theStage.addEventListener(MouseEvent.MOUSE_MOVE, newRandomBullet)
 		}
 		
 		private function newRandomBullet(e:MouseEvent):void {
-			var bullet:Bullet = new Bullet()
-			bullet.initalize()
+			var bullet:OrbitingBullet = new OrbitingBullet()
+			bullet.initialize()
+			bullet.randomize()
 			bullets.push(bullet)
 			
 			bullet.x = e.stageX
@@ -115,7 +118,7 @@
 		
 		private function tick(e:Event):void {
 			var offscreens:Array = new Array()
-			var bullet:Bullet
+			var bullet:OrbitingBullet
 			for (var i:int = 0; i < bullets.length; i++) {
 				bullet = bullets[i]
 				bullet.tick(1.0)
