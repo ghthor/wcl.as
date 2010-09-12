@@ -11,7 +11,7 @@
 		
 		// Maximum/Min degee change
 		private static const MIN_SPEED:Number = 1
-		private static const MAX_SPEED:Number = 20
+		private static const MAX_SPEED:Number = 10
 		private static var speedRand:RandomFloat = new RandomFloat(MIN_SPEED, MAX_SPEED)
 		
 		private static const PERIOD_MIN:Number = 10
@@ -22,8 +22,8 @@
 		private static const MAX_ORBIT_DISTANCE:Number = 40
 		private static var orbitDistanceRand:RandomFloat = new RandomFloat(MIN_ORBIT_DISTANCE, MAX_ORBIT_DISTANCE)
 		
-		private var rotation:RotationOscillator		
-		private var _distance:Oscillator		
+		private var rotation:RotationOscillator
+		private var _distance:Oscillator
 		
 		public function Orbit():void {
 			rotation = new RotationOscillator()

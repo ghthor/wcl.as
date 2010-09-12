@@ -8,11 +8,11 @@
 	 * @author ...
 	 */
 	public class BulletRotation {
-		private static const MIN:Number = 1
-		private static const MAX:Number = 10
+		private static const MIN:Number = 10
+		private static const MAX:Number = 15
 		private static var rotationRand:RandomFloat = new RandomFloat(MIN, MAX)
 		
-		private static const PERIOD_MIN:Number = 1
+		private static const PERIOD_MIN:Number = 10
 		private static const PERIOD_MAX:Number = 50
 		private static var periodRand:RandomFloat = new RandomFloat(PERIOD_MIN, PERIOD_MAX)
 		
