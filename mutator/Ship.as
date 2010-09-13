@@ -2,6 +2,7 @@
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import mutator.form.GameScreen;
 	import wcl.AccurateMovieClip;
 	import wcl.form.FormManager;
 	
@@ -43,8 +44,21 @@
 			currentBulletType.defaultVel()
 		}
 		
-		public function fire():OrbitingBullet {
-			return currentBulletType.clone()
+		public function fire(gameScreen:GameScreen):void {
+			var angle:Number = -105
+			var bullet:OrbitingBullet;
+			for (var i:int = 0; i < 5; i++) {
+				bullet = currentBulletType.clone()
+				bullet.initialize()
+				bullet.velocity.setToDegrees(angle)
+				bullet.x = FormManager.theStage.mouseX - bullet.xOffset()
+				bullet.y = FormManager.theStage.mouseY
+				gameScreen.bullets.push(bullet)
+				gameScreen.addChild(bullet)
+				angle += 5
+			}
+			
+			//return currentBulletType.clone()
 		}
 		
 		

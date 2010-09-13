@@ -10,17 +10,17 @@
 	public class Orbit {
 		
 		// Maximum/Min degee change
-		private static const MIN_SPEED:Number = 1
-		private static const MAX_SPEED:Number = 5
+		private static const MIN_SPEED:Number = -10
+		private static const MAX_SPEED:Number = 10
 		private static var speedRand:RandomFloat = new RandomFloat(MIN_SPEED, MAX_SPEED)
 		
 		// Period of oscillation between the min/max of the angle oscillation
-		private static const MIN_SPEED_PERIOD:Number = 10
-		private static const MAX_SPEED_PERIOD:Number = 100
+		private static const MIN_SPEED_PERIOD:Number = 1
+		private static const MAX_SPEED_PERIOD:Number = 50
 		private static var speedPeriodRand:RandomFloat = new RandomFloat(MIN_SPEED_PERIOD, MAX_SPEED_PERIOD)
 		
 		// Distance from the center point
-		private static const MIN_ORBIT_DISTANCE:Number = 0
+		private static const MIN_ORBIT_DISTANCE:Number = -100
 		private static const MAX_ORBIT_DISTANCE:Number = 100
 		private static var orbitDistanceRand:RandomFloat = new RandomFloat(MIN_ORBIT_DISTANCE, MAX_ORBIT_DISTANCE)
 		

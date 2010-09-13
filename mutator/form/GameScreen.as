@@ -34,7 +34,7 @@
 			stop();
 		}
 		
-		private var bullets:Array = new Array()
+		public var bullets:Array = new Array()
 		
 		public function testingInit() {
 			FormManager.theStage.addEventListener(MouseEvent.MOUSE_DOWN, shipFireToggle)
@@ -48,12 +48,12 @@
 			shipFiring = !shipFiring		
 		}
 		
-		private function spawnBullet(atX:Number, atY:Number):void {
-			var bullet:OrbitingBullet = ship.fire()
+		private function spawnBullet(bullet:OrbitingBullet, atX:Number, atY:Number):void {
+			//var bullet:OrbitingBullet = ship.fire()
 			//bullet.x = e.stageX - bullet.xOffset()
 			//bullet.y = e.stageY
-			bullet.x = atX - bullet.xOffset()
-			bullet.y = atY
+			//bullet.x = atX - bullet.xOffset()
+			//bullet.y = atY
 			bullets.push(bullet)
 			addChild(bullet)
 		}
@@ -123,7 +123,8 @@
 		private function tick(e:Event):void {
 			
 			if (shipFiring) {
-				spawnBullet(FormManager.theStage.mouseX, FormManager.theStage.mouseY)
+				//spawnBullet(FormManager.theStage.mouseX, FormManager.theStage.mouseY)
+				ship.fire(this)
 			}
 			
 			var offscreens:Array = new Array()
