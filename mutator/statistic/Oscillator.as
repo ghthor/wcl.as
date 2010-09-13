@@ -11,9 +11,28 @@ package mutator.statistic
 	 */
 	public class Oscillator extends Complex //implements Mutatable, Ticker
 	{
-		private var _period:Number
-		private var direction:Boolean
-		private var _start:Number
+		public var _period:Number
+		public var _direction:Boolean
+		public var _start:Number
+		
+		public static function clone(c:Oscillator, r:Oscillator = null):Oscillator {
+			if (r == null) {
+				r = new Oscillator()
+			}
+			Complex.clone(c, r)
+			r._period = c._period
+			r._direction = c._direction
+			r.start = c._start
+			return r
+		}
+		
+		public static function RandomOscillationDirection():Boolean {
+			return RandomBool.next()
+		}	
+		
+		public function Oscillator():void {
+			super()
+		}
 		
 		public function get start():Number { return _start; }		
 		public function set start(value:Number):void {
@@ -26,12 +45,10 @@ package mutator.statistic
 			cur = start
 		}
 		
-		public static const TOWARDS_MAX:Boolean = true
-		public static const TOWARDS_MIN:Boolean = false
+		public function get direction():Boolean { return _direction; }
 		
-		public function Oscillator():void {
-			super()
-		}
+		public static const TOWARDS_MAX:Boolean = true
+		public static const TOWARDS_MIN:Boolean = false		
 		
 		public function get period():Number { return _period; }
 		public function set period(value:Number):void {
@@ -58,7 +75,7 @@ package mutator.statistic
 			if (min == max) {
 				return;
 			}
-			if (direction == TOWARDS_MAX) {
+			if (_direction == TOWARDS_MAX) {
 				tickPos(percent)
 			} else {
 				tickNeg(percent)
@@ -68,25 +85,25 @@ package mutator.statistic
 		private function tickNeg(percent:Number) {
 			cur -= (range / period / 2) * percent
 			if (cur <= min) {
-				direction = !direction
+				_direction = !_direction
 			}
 		}
 		
 		private function tickPos(percent:Number) {
 			cur += (range / period / 2) * percent
 			if (cur >= max) {
-				direction = !direction
+				_direction = !_direction
 			}
 		}
 		
 		public function setStartAndDirection(start_:Number, direction_:Boolean) {
 			start = start_
-			direction = direction_
+			_direction = direction_
 		}
 		
 		public function randomStartAndDirection():void {
 			start = randomWithin()
-			direction = RandomBool.next()
+			_direction = RandomBool.next()
 		}
 		
 		public function mutate() {

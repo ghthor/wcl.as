@@ -10,14 +10,30 @@
 		private static const CW:Boolean = false
 		private static const CCW:Boolean = true
 		
-		private var rotationDirection:Boolean
+		public var _rotationDirection:Boolean
+		
+		public static function clone(c:RotationOscillator, r:RotationOscillator = null):RotationOscillator {
+			if (r == null) {
+				r = new RotationOscillator()
+			}
+			Oscillator.clone(c, r)
+			r._rotationDirection = c._rotationDirection
+			return r
+		}
+		
+		public function set rotationDirection(value:Boolean):void {
+			_rotationDirection = value;
+		}
+		public function get rotationDirection():Boolean {
+			return _rotationDirection
+		}
 		
 		public function randomizeDirection():void {
-			rotationDirection = RandomBool.next()
+			_rotationDirection = RandomBool.next()
 		}
 		
 		public function get nextRotation():Number {
-			if (rotationDirection == CCW) {
+			if (_rotationDirection == CCW) {
 				return cur
 			} // else direction == CW
 			return -cur

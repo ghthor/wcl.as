@@ -12,6 +12,7 @@
 	public class Ship extends AccurateMovieClip {
 		
 		private var bulletSpawnPoint:MovieClip;
+		public var currentBulletType:OrbitingBullet
 		
 		public function Ship():void {
 			stop()
@@ -23,6 +24,11 @@
 			y = FormManager.theStage.mouseY
 			
 			bulletSpawnPoint = BulletSpawnPt;
+			
+			currentBulletType = new OrbitingBullet()
+			currentBulletType.initialize()
+			currentBulletType.randomize()
+			currentBulletType.defaultVel()
 		}
 		
 		public function mouseListener(e:MouseEvent):void {
@@ -30,8 +36,15 @@
 			y = e.stageY;
 		}
 		
-		public function fire(e:MouseEvent):void {
-			
+		public function newBullet():void {
+			currentBulletType = new OrbitingBullet()
+			currentBulletType.initialize()
+			currentBulletType.randomize()
+			currentBulletType.defaultVel()
+		}
+		
+		public function fire():OrbitingBullet {
+			return currentBulletType.clone()
 		}
 		
 		

@@ -16,17 +16,32 @@
 		private static const PERIOD_MAX:Number = 50
 		private static var periodRand:RandomFloat = new RandomFloat(PERIOD_MIN, PERIOD_MAX)
 		
-		private var rotation:Oscillator = new Oscillator()
+		private var rotation:Oscillator
 		
 		private static const CW:Boolean = false
 		private static const CCW:Boolean = true
 		
 		private var direction:Boolean
 		
+		public function BulletRotation(direction_:Boolean, rotation_:Oscillator = null):void {
+			if (rotation_ == null) {
+				rotation = new Oscillator()
+				randomize()
+			} else {	
+				rotation = rotation_
+			}
+			direction = direction_
+			return
+		}
+		
 		public static function New():BulletRotation {
-			var r:BulletRotation = new BulletRotation()
-			r.randomize()
-			return r
+			var n:BulletRotation = new BulletRotation(RandomBool.next())
+			return n
+		}
+		
+		public function clone():BulletRotation {
+			var c:BulletRotation = new BulletRotation(direction, Oscillator.clone(rotation))
+			return c
 		}
 		
 		public function randomize():void {

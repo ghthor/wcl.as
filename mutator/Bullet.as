@@ -16,11 +16,26 @@
 		private var size:BulletSize
 		private var rotater:BulletRotation
 		
+		public function Bullet(size_:BulletSize = null, rotater_:BulletRotation = null) {
+			super()
+			if (size_ == null) {
+				size = BulletSize.New()
+			} else {
+				size = size_
+			}
+			if ( rotater_ == null) {
+				rotater = BulletRotation.New()
+			} else {
+				rotater = rotater_
+			}
+		}
+		
 		public function initialize():void {
-			//velocity = new Vector2D()
-			//randomizeVel()
-			size = BulletSize.New()
-			rotater = BulletRotation.New()
+		}
+		
+		public function clone():Bullet {
+			var c:Bullet = new Bullet(size.clone(), rotater.clone())
+			return c			
 		}
 		
 		public function randomize():void {

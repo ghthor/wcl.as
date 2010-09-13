@@ -21,15 +21,34 @@ package mutator
 		
 		private static const BULLET_SIZE = 100
 		
-		public var horizontal:Oscillator = new Oscillator()
-		public var vertical:Oscillator = new Oscillator()
+		public var horizontal:Oscillator
+		public var vertical:Oscillator
 		
 		/* INTERFACE mutator.Mutatable */
 		
+		public function BulletSize(horizontal_:Oscillator = null, vertical_:Oscillator = null):void {
+			if (horizontal_ == null) {
+				horizontal = new Oscillator()
+				randomizeHorizontal()
+			} else {
+				horizontal = horizontal_
+			}
+			if (vertical_ == null) {
+				vertical = new Oscillator()
+				randomizeVertical()
+			} else {
+				vertical = vertical_
+			}
+		}
+		
 		public static function New():BulletSize {
-			var r:BulletSize = new BulletSize();
-			r.randomize()
+			var r:BulletSize = new BulletSize()
 			return r
+		}
+		
+		public function clone():BulletSize {
+			var c:BulletSize = new BulletSize(Oscillator.clone(horizontal), Oscillator.clone(vertical))
+			return c
 		}
 		
 		public function get scaleX():Number {
@@ -41,14 +60,20 @@ package mutator
 		}
 		
 		public function randomize():void {
+			randomizeHorizontal()
+			randomizeVertical()
+		}
+		
+		private function randomizeHorizontal():void {
 			horizontal.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())
-			vertical.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())
-			
 			horizontal.period = periodRand.next()
 			horizontal.randomStartAndDirection()
-			
+		}
+		
+		private function randomizeVertical():void {
+			vertical.setMinMaxWithRandoms(sizeRand.next(), sizeRand.next())			
 			vertical.period = periodRand.next()
-			vertical.randomStartAndDirection()
+			vertical.randomStartAndDirection()			
 		}
 		
 		public function tick(percent:Number) {
