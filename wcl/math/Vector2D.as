@@ -25,6 +25,14 @@
 			scale(magnitude)
 		}
 		
+		public function addDegrees(value:Number):void {
+			setWithDegreesAndLength(value + toDegrees(), length)
+		}
+		
+		public function setToDegrees(value:Number):void {
+			setWithDegreesAndLength(value, length)
+		}
+		
 		public function setWithDegreesAndLength(degrees:Number, magnitude:Number):void {
 			setWithRadianAndLength(degrees * Math.PI/180, magnitude)
 		}
