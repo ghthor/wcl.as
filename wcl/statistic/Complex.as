@@ -8,21 +8,24 @@ package wcl.statistic
 	 */
 	public class Complex
 	{
-		private var _min:Number;	
-		private var _max:Number;		
-		private var _cur:Number;	
+		public var _min:Number;	
+		public var _max:Number;		
+		public var _cur:Number;	
 		
-		public function Complex() {
-			_min = _max = _cur = 0
+		public function Complex(min_:Number = 0, max_:Number = 0, cur_:Number = 0):void {
+			_min = min_
+			_max = max_
+			_cur = cur_
 		}
 		
-		public function clone():Complex {
-			var c:Complex = new Complex();
-			c.min = _min;
-			c.max = _max;
-			c.cur = _cur;
-			
-			return c;
+		public static function clone(c:Complex, r:Complex = null):Complex {
+			if (r == null) {
+				r = new Complex();
+			}
+			r._min = c._min;
+			r._max = c._max;
+			r._cur = c._cur;
+			return r;
 		}
 		
 		public function get range():Number {
