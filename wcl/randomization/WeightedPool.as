@@ -31,7 +31,7 @@
 				}
 				lowerBounds = upperBounds
 			}
-			trace("Some Sort of failure, wasn't an object pulled")
+			trace("Some Sort of failure, there wasn't an object to pull")
 			return weightedObject.id
 		}
 		
