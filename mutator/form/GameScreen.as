@@ -16,6 +16,8 @@
 	import wcl.form.*
 	import wcl.math.RandomBool;
 	import wcl.math.RandomFloat;
+	import wcl.randomization.ExamplePool;
+	import wcl.randomization.Weight;
 	import wcl.render.Canvas;
 	/**
 	 * ...
@@ -43,9 +45,18 @@
 			FormManager.theStage.addEventListener(KeyboardEvent.KEY_UP, keyUp)
 		}
 		
+		var pool:ExamplePool = new ExamplePool()
+		private function weightedPoolTest():void {
+			for (var i:int = 0; i < 20; i++) {
+				var item:Weight = pool.next()
+				trace(item)
+			}
+			trace(pool)
+		}
+		
 		var shipFiring:Boolean = false
 		private function shipFireToggle(e:MouseEvent):void {
-			shipFiring = !shipFiring		
+			shipFiring = !shipFiring
 		}
 		
 		private function spawnBullet(bullet:OrbitingBullet, atX:Number, atY:Number):void {
@@ -114,6 +125,9 @@
 			switch(char) {
 				case "a":
 					ship.newBullet()
+					break
+				case "t":
+					weightedPoolTest()
 					break
 				default:
 					trace("Key Up: " + e.keyCode)
