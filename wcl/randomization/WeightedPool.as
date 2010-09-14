@@ -11,32 +11,59 @@
 		public function totalWeight():Number {
 			var total:Number = 0
 			for (var i:int = 0; i < objects.length; i++) {
-				total += (objects[i] as WeightedObject).weight
+				total += (objects[i] as Weight).weight
 			}
 			return total
 		}
 		
-		public function next():WeightedObjectId {
+		public function next():Weight {
 			var lowerBounds:Number = 0
 			var upperBounds:Number
 			
-			var thePickValue:Number = RandomFloat(0, totalWeight())
+			var thePickValue:Number = RandomFloat.within(0, totalWeight())
 			
-			var weightedObject:WeightedObject
+			var weight:Weight
 			for (var i:int = 0; i < objects.length; i++) {
-				weightedObject = weightObjectAt(i)
-				upperBounds = lowerBounds + weightedObject.weight
+				weight = weightAt(i)
+				if (weight.weight == 0) {
+					continue
+				}
+				upperBounds = lowerBounds + weight.weight
 				if (thePickValue >= lowerBounds && thePickValue < upperBounds) {
-					return weightedObject.id
+					weight.timesPulled++
+					return weight
 				}
 				lowerBounds = upperBounds
 			}
 			trace("Some Sort of failure, there wasn't an object to pull")
-			return weightedObject.id
+			return weight
 		}
 		
-		private function weightObjectAt(index:int):WeightedObject {
-			return (objects[index] as WeightedObject)
+		private function weightAt(index:int):Weight {
+			return (objects[index] as Weight)
+		}
+		
+		public function addAnItemToPool(weight:Weight):void {
+			objects.push(weight)
+		}
+		
+		public function toString():String {
+			var str:String = "[Weighted Pool] - Statistics\n"
+			var totalPulls:Number = 0
+			var totaledWeight = totalWeight()
+			var weight:Weight
+			var i:int = 0
+			for (; i < objects.length; i++) {
+				weight = weightAt(i)
+				totalPulls += weight.timesPulled
+			}
+			str += "TotalWeight = "+ totaledWeight + "\n\n"
+			str += "type\tWeight\t% Of Pool\t% Pulled\n"
+			for (i = 0; i < objects.length; i++) {
+				weight = weightAt(i)
+				str += weight.type + "\t" + weight.weight + "\t" + 100*weight.weight/totaledWeight + "%\t" + 100*Number(weight.timesPulled)/Number(totalPulls) + "%\n"
+			}
+			return str
 		}
 	}
 	
