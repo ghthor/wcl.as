@@ -11,6 +11,26 @@
 			//y = p_y;
 		}
 		
+		public static function NewWithAngleAndMag(angle:Number, magnitude:Number):Vector2D {
+			var v:Vector2D = new Vector2D(Math.cos(angle), Math.sin(angle))
+			v.scale(magnitude)
+			return v
+		}
+		
+		public static function NewWithDegreesAndMag(degrees:Number, magnitude:Number):Vector2D {
+			var v:Vector2D = new Vector2D(Math.cos(degrees * Math.PI/180), Math.sin(degrees * Math.PI/180))
+			v.scale(magnitude)
+			return v
+		}
+		
+		public function cloneAsPoint():Point {
+			return clone()
+		}
+		
+		public function cloneAsVector2D():Vector2D {
+			return new Vector2D(x,y)
+		}
+		
 		// Sets "this"'s x and y properties
 		public function setVector2D(p_x:Number, p_y:Number):void
 		{
