@@ -6,14 +6,14 @@
 	 */
 	public class Weight {
 		public var weight:Number
-		public var id:uint
 		public var type:String
+		public var id:uint
 		public var timesPulled:uint = 0
 		
-		public function Weight(weight_:Number, id_:uint = 0, type_:String = "") {
+		public function Weight(weight_:Number, type_:String = "", id_:uint = 0) {
 			weight = weight_
-			id = id_
 			type = type_
+			id = id_
 		}
 		
 		public function toString():String {
