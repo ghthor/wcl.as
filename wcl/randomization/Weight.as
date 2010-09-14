@@ -10,7 +10,7 @@
 		public var type:String
 		public var timesPulled:uint = 0
 		
-		public function Weight(weight_:Number, id_:uint, type_:String) {
+		public function Weight(weight_:Number, id_:uint = 0, type_:String = "") {
 			weight = weight_
 			id = id_
 			type = type_
