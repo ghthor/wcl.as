@@ -13,9 +13,15 @@
 		private var _Y:Number;
 		private var __rotation:Number;
 		
-		public function isOffscreen():Boolean {
+		public function isOffscreen(byAtLeast:Number = 0):Boolean {
 			var screen:Rectangle = new Rectangle(0, 0, FormManager.theStage.stageWidth, FormManager.theStage.stageHeight)
 			var me:Rectangle = this.getRect(FormManager.theStage)
+			
+			// Extend the rectangle by the buffer
+			me.top -= byAtLeast / 2
+			me.left -= byAtLeast / 2
+			me.width += byAtLeast / 2
+			me.height += byAtLeast / 2
 			
 			var intersection:Rectangle = screen.intersection(me)
 			return (intersection.height + intersection.width == 0)
