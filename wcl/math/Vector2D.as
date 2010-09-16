@@ -160,6 +160,11 @@
 			return v
 		}
 		
+		public function setToOffsetTo(p:Point):void {
+			x = p.x - x
+			y = p.y - y
+		}
+		
 		public function Invert() {
 			x = -x
 			y = -y
