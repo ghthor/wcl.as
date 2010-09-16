@@ -178,6 +178,12 @@
 			return (t * 180/Math.PI);
 		}
 		
+		public function capMagitudeAt(max:Number):void {
+			if (length > max) {
+				makeLength(max)
+			}
+		}
+		
 		public override function toString():String{
 			var r_val:String =  " <" + x + ", " + y + "> " + "Mag: " + length;
 			return r_val;
