@@ -1,5 +1,7 @@
 ﻿package wcl {
 	import flash.display.Sprite;
+	import flash.geom.Rectangle;
+	import wcl.form.FormManager;
 	
 	/**
 	 * ...
@@ -10,6 +12,14 @@
 		private var _X:Number;
 		private var _Y:Number;
 		private var __rotation:Number;
+		
+		public function isOffscreen():Boolean {
+			var screen:Rectangle = new Rectangle(0, 0, FormManager.theStage.stageWidth, FormManager.theStage.stageHeight)
+			var me:Rectangle = this.getRect(FormManager.theStage)
+			
+			var intersection:Rectangle = screen.intersection(me)
+			return (intersection.height + intersection.width == 0)
+		}
 		
 		public function AccurateSprite():void {
 			super()
